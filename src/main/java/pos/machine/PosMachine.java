@@ -27,10 +27,10 @@ public class PosMachine {
     public static ArrayList<ItemInfoDetails> getItemInfo(List<String> barcodes) {
         ArrayList<ItemInfoDetails> itemsInformation = new ArrayList<>();
         List<String> uniqueBarcodes = barcodes.stream().distinct().collect(Collectors.toList());
-        uniqueBarcodes.forEach(barcode -> itemsInformation.add(retrieveItemDetail(barcode)));
+        uniqueBarcodes.forEach(barcode -> itemsInformation.add(getItemDetails(barcode)));
         return countQuantityOfItems(barcodes, itemsInformation);
     }
-    private static ItemInfoDetails retrieveItemDetail(String barcode) {
+    private static ItemInfoDetails getItemDetails(String barcode) {
         ItemInfo item = ITEM_INFOS.stream().filter(ItemInfo -> ItemInfo.getBarcode().equals(barcode)).findFirst().get();
         return new ItemInfoDetails(item.getBarcode(), item.getName(), item.getPrice());
     }
